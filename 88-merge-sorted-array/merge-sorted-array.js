@@ -7,6 +7,18 @@
  * @return {void} Do not return anything, modify nums1 in-place instead.
  */
 var merge = function (nums1, m, nums2, n) {
-  nums1.splice(m, n, ...nums2);
-  nums1.sort((a, b) => (a - b));
+  let n1 = m - 1;
+  let n2 = n - 1;
+  let n1L = nums1.length - 1;
+
+  while (n2 >= 0) {
+    if (n1 >= 0 && nums1[n1] > nums2[n2]) {
+      nums1[n1L] = nums1[n1];
+      n1--;
+    } else {
+      nums1[n1L] = nums2[n2];
+      n2--;
+    }
+    n1L--;
+  }
 }
