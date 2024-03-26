@@ -1,0 +1,29 @@
+nums(int arr) , asc order
+convert to height balanced BST
+
+Ex. 1
+nums = [-10, -3, 0, 5, 9]
+out = [0, -3, 9, -10, null, 5] or [0, -10, 5, null, -3, null, 9]
+
+Ex, 2
+nums - [1, 3]
+out = [3,1] OR [1, null, 3]
+
+
+if nums is empty -> return null
+
+mid = nums.length / 2, rounded down
+find mid val - nums[mid], this is the head node
+for vals w. idx smaller than mid - L. subtree
+  mid = (0 + mid - 1) / 2
+  find mid val = nums[mid]
+  this is the head L. node
+for vals w. idx > than mid - R.subtree
+  mid = (mid + 1 + last idx) / 2
+  find mid val = nums[mid]
+  this is the head R.node
+
+
+
+
+
