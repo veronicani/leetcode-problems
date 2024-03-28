@@ -1,41 +1,22 @@
-2 int arrs -> increasing order
-nums1, m = # els in nums1, length  = m + n
-nums2, n = # els in nums2, length = n
-
-mutate nums1 -> it includes nums2 in increasing order
-return -> nothing
+nums1, m (num els) len. m + n
+nums2, n (nums els) len. n
+increasing order
+out = no return, mutate nums1 to contain nums2, sorted
 
 Ex. 1
-nums1 = [1, 2, 3, 0, 0, 0], m = 3
-nums2 = [2, 5, 6], n = 3
+nums1 = [1, 2, 3, 0, 0, 0] m = 3
+nums2 = [2,5,6] n = 3
 out = [1, 2, 2, 3, 5, 6]
 
+n1  n2  nL   nums1
+
+
 Ex. 2
-nums1 = [0, 0], m = 0
-nums2 = [1, 2], n = 2
-out = [1, 2]
-
-Ex. 3
-nums1 = [1, 2, 4, 0, 0]
-nums2 = [1, 2]
-
-Ex. 3
-nums1 = [1], m = 1
-nums2 = [], n = 0
+nums1 = [1] m = 1
+nums2 = [] n = 0
 out = [1]
 
-if n = 0, return nums1
-if m = 0, reassign nums1 -> nums2, return nums1
-assign 3 pointers
-i is at m - 1 (nums1 greatest val)
-j is at n - 1 (nums2 greatest val)
-k is at nums1.length - 1 (nums1 last val)
-loop until we've reached beginning of nums2 - j>= 0
-  if nums2[j] is >= nums1[i]
-    replace nums1[k] -> nums2[j]
-    decrement j
-  else
-    replace nums1[k] -> nums1[i]
-    decrement i
-  decrement k
-
+Ex. 3
+nums1 = [0] m = 0
+nums2 = [1] n = 1
+out = [1]
