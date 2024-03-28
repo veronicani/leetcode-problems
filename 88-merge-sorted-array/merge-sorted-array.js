@@ -9,16 +9,16 @@
 var merge = function (nums1, m, nums2, n) {
   let n1 = m - 1;
   let n2 = n - 1;
-  let n1L = nums1.length - 1;
+  let nL = nums1.length - 1;
 
   while (n2 >= 0) {
-    if (n1 >= 0 && nums1[n1] > nums2[n2]) {
-      nums1[n1L] = nums1[n1];
+    if (nums1[n1] > nums2[n2]) {
+      nums1[nL] = nums1[n1];
       n1--;
     } else {
-      nums1[n1L] = nums2[n2];
+      nums1[nL] = nums2[n2];
       n2--;
     }
-    n1L--;
+    nL--;
   }
 }
