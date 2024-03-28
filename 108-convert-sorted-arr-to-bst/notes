@@ -14,11 +14,12 @@ if nums is empty -> return null
 
 mid = nums.length / 2, rounded down
 find mid val - nums[mid], this is the head node
-for vals w. idx smaller than mid - L. subtree
+for vals w. idx smaller than mid - L. subtree -> push this to out
   mid = (0 + mid - 1) / 2
   find mid val = nums[mid]
   this is the head L. node
-for vals w. idx > than mid - R.subtree
+
+for vals w. idx > than mid - R.subtree -> push this to out
   mid = (mid + 1 + last idx) / 2
   find mid val = nums[mid]
   this is the head R.node
