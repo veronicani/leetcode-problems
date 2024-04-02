@@ -14,6 +14,5 @@ var removeElement = function(nums, val) {
         count++;
       }
     }
-    console.log('nums=', nums);
     return count;
 };
