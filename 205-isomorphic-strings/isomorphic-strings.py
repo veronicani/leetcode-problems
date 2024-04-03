@@ -13,15 +13,16 @@ class Solution:
 
         if len(s) != len(t):
             return False
-        else:
-            s_t = dict()
-            for i, char in enumerate(s):
-                if char not in s_t:
-                    if t[i] in s_t.values():
-                        return False
-                    s_t[char] = t[i]
-                else:
-                    if s_t[char] != t[i]:
-                        return False
-            return True
+        
+        s_t = dict()
+        
+        for i, char in enumerate(s):
+            if char not in s_t:
+                if t[i] in s_t.values():
+                    return False
+                s_t[char] = t[i]
+            else:
+                if s_t[char] != t[i]:
+                    return False
+        return True
         
