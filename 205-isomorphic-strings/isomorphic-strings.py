@@ -3,26 +3,43 @@ class Solution:
         # if len(s) is not len(t) return false
 
         # create a map of s -> t
+        # create a map of t -> s
+        
         # loop over s by index
-        # if s[i] is not in map
-            # add to map, map to t[i]
+        # if s_char is not in s_t
+            # add s_char map, map to t[i]
+            # add t[i] to t_map, map to s_char
         # else
-            # if map @ s is not equal to t[i]
+            # check val of s_t[s_char]
+            # if t_s[val] is not s_char
             # return false
+        
         # return true
 
         if len(s) != len(t):
             return False
         
-        s_t = dict()
+        s_t = {}
+        t_s = {}
         
-        for i, char in enumerate(s):
-            if char not in s_t:
-                if t[i] in s_t.values():
+        for i, s_char in enumerate(s):
+            t_char = t[i]
+
+            if s_char in s_t:
+                if s_t[s_char] != t_char:
                     return False
-                s_t[char] = t[i]
+            
             else:
-                if s_t[char] != t[i]:
+                if t_char in t_s:
                     return False
+
+                s_t[s_char] = t_char
+                t_s[t_char] = s_char
+            
+            s_val = s_t[s_char]
+
+            if t_s[s_val] != s_char:
+                return False
+
         return True
         
