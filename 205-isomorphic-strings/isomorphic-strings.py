@@ -19,11 +19,6 @@ class Solution:
 
                 s_t[s_char] = t_char
                 t_s[t_char] = s_char
-            
-            s_val = s_t[s_char]
-
-            if t_s[s_val] != s_char:
-                return False
 
         return True
         
