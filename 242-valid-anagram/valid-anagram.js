@@ -5,9 +5,15 @@
  */
 var isAnagram = function(s, t) {
     if (s.length !== t.length) return false;
-    
-    let sFC = freqCounter(s);
-    let tFC = freqCounter(t);
+
+    const sFC = {};
+    const tFC = {};
+
+    for (let i = 0; i < s.length; i++) {
+        sFC[s[i]] = (sFC[s[i]] || 0) + 1;
+        tFC[t[i]] = (tFC[t[i]] || 0) + 1;
+    }
+
     for (key in sFC) {
         if (tFC[key] !== sFC[key]) {
             return false;
@@ -15,15 +21,3 @@ var isAnagram = function(s, t) {
     }
     return true;
 };
-
-function freqCounter(str) {
-    const charCount = {};
-    for (let s of str) {
-        if (charCount[s] === undefined) {
-            charCount[s] = 1;
-        } else {
-            charCount[s]++;
-        }
-    }
-    return charCount;
-}
