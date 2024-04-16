@@ -9,7 +9,7 @@ var isSubsequence = function(s, t) {
     let sP = 0;
     let tP = 0;
 
-    while (t[tP] !== undefined) {
+    while (sP < s.length && tP < t.length) {
         if (s[sP] === t[tP]) {
             sP++;
             tP++;
