@@ -20,7 +20,6 @@ var rotateRight = function(head, k) {
         tail = tail.next;
         len++;
     }
-    console.log('len=', len, 'tail=', tail);
 
     //find the point to cut off from the LL - k vals from tail
     if (k >= len) k = k % len;
