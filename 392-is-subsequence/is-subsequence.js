@@ -10,12 +10,8 @@ var isSubsequence = function(s, t) {
     let tP = 0;
 
     while (sP < s.length && tP < t.length) {
-        if (s[sP] === t[tP]) {
-            sP++;
-            tP++;
-        } else {
+        if (s[sP] === t[tP]) sP++;
         tP++;
-        }
     }
 
     if (s[sP]) return false;
