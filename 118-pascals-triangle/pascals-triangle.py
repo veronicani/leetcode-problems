@@ -1,15 +1,20 @@
 class Solution:
     def generate(self, numRows: int) -> List[List[int]]:
-        res = [[1]]
+        if numRows == 0:
+            return [[]]
+        
+        tri = [[1]]
 
-        for i in range(numRows - 1):
+        for r in range(1, numRows):
+            print("r=", r)
+            temp = [0] + tri[r - 1] + [0]
             row = []
-            temp = [0] + res[-1] + [0]
             
-            for j in range(len(res[-1]) + 1):
-                row.append(temp[j] + temp[j + 1])
+            for i in range(1, len(temp)):
+                row.append(temp[i - 1] + temp[i])
+            
+            tri.append(row)
         
-            res.append(row)
-        
-        return res
+        return tri
+
 
