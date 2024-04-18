@@ -24,11 +24,17 @@ var convertToForwardingAddress = function(email) {
         //if char -> push to forwardLocal
     //return forwardLocal + domain
 
-    const [local, domain] = email.split('@');
     let forwardLocal = '';
-    for (char of local) {
-        if (char === '+') break;
-        if (char !== '.') forwardLocal += char;
+    for (let i = 0; i < email.length; i++) {
+        if (email[i] === '+' || email[i] === '@') break;
+        if (email[i] !== '.') forwardLocal += email[i];
     }
+
+    let domain = '';
+    for (let j = email.length - 1; j >= 0; j--) {
+        if (email[j] === '@') break;
+        domain = email[j] + domain;
+    }
+
     return forwardLocal + '@' + domain;
 }
