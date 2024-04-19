@@ -3,9 +3,12 @@
  * @return {number}
  */
 var majorityElement = function(nums) {
-    let nFreq = {};
-    for (let n of nums) {
-        nFreq[n] = nFreq[n] + 1 || 1;
-        if (nFreq[n] > nums.length / 2) return n;
+    let res = 0;
+    let count = 0;
+    for (n of nums) {
+        if (count === 0) res = n;
+        if (n === res) count++;
+        else count--;
     }
+    return res;
 };
