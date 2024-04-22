@@ -4,25 +4,25 @@
  * @return {number[]}
  */
 var nextGreaterElement = function(nums1, nums2) {
-    const ans = [];
-    const nums2Idx = {};
-    
-    for (let n = 0; n < nums2.length; n++) {
-        const n2 = nums2[n]
-        nums2Idx[n2] = n;
-    }
+    const ans = new Array(nums1.length).fill(-1);
+    const nums1Idx = new Map(nums1.map((val, i) => [val, i]));
 
-    for (let i = 0; i < nums1.length; i++) {
-        const n1 = nums1[i];
-        const matchIdx = nums2Idx[n1];
-        //find greater val than curr val of nums1 @ nums2
-        for (let j = matchIdx + 1; j < nums2.length; j++) {
-            if (nums2[j] > nums1[i]) {
-                ans.push(nums2[j]);
-                break;
-            }
+    let stack = [];
+    
+    for (let i = 0; i < nums2.length; i++) {
+        let n2 = nums2[i];
+
+        let stackTop = stack[stack.length - 1];
+        while (stack.length > 0 && n2 > stackTop) {
+            let stackTopIdx = nums1Idx.get(stackTop);
+            ans[stackTopIdx] = n2;
+            stack.pop();
+            stackTop = stack[stack.length - 1];
         }
-        if (ans.length < i + 1) ans.push(-1);
+        if (nums1Idx.has(n2)) {
+            stack.push(n2);
+        }
     }
+    
     return ans;
 };
