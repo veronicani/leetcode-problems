@@ -58,25 +58,21 @@ class DLLNode {
 
     put(key, value) {
         if (this.cache.get(key) !== undefined) {
-            //update the val of the node
             let currNode = this.cache.get(key);
-            currNode.val = value;
-            //move node to end of queue
             this._removeNode(currNode);
-            this._insertNode(currNode);
-        } else {
-            //if cache is at capacity
-            if (this.cache.size === this.capacity) {
-                //remove LRU node from queue and cache
-                let lruNode = this._findLRUNode();
-                this._removeNode(lruNode);
-                this.cache.delete(lruNode.key);
-            }
-            //add new Node to the queue
-            //add key to cache w/ new Node)
-            let newNode = new DLLNode(key, value);
-            this._insertNode(newNode);
-            this.cache.set(key, newNode);
+            this.cache.delete(currNode.key);
         }
+        
+        //if cache is at capacity
+        if (this.cache.size === this.capacity) {
+            //remove LRU node from queue and cache
+            let lruNode = this._findLRUNode();
+            this._removeNode(lruNode);
+            this.cache.delete(lruNode.key);
+        }
+  
+        let newNode = new DLLNode(key, value);
+        this._insertNode(newNode);
+        this.cache.set(key, newNode);
     }
 }
