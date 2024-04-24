@@ -5,48 +5,51 @@
  * @return {number[]}
  */
 var findClosestElements = function(arr, k, x) {
-    let cV = arr[0];
+    let left = 0;
+    let right = arr.length - 1;
+    let cVal = arr[0];
     let cIdx = 0;
 
-    let start = 0;
-    let end = arr.length - 1;
-
-    while (end >= start) {
-        let m = Math.floor((start + end) / 2);
-        let closestDiff = Math.abs(x - cV);
+    while (left <= right) {
+        let m = Math.floor((left + right) / 2);
         let currDiff = Math.abs(x - arr[m]);
-
-        if (currDiff < closestDiff || (currDiff === closestDiff && arr[m] <= cV)) {
-            cV = arr[m];
-            cIdx = m;
-        }
-        if (arr[m] === x) {
-            break;
-        } else if (arr[m] > x) {
-            end = m - 1;
+        let cDiff = Math.abs(x - cVal);
+        if (currDiff < cDiff || 
+            (currDiff === cDiff && arr[m] < cVal)){
+                cVal = arr[m];
+                cIdx = m;
+            }
+        
+        if (arr[m] > x) {
+            right = m - 1;
+        } else if (arr[m] < x) {
+            left = m + 1;
         } else {
-            start = m + 1;
+            break;
         }
     }
-    
-    //define the window for vals
+
     let l = cIdx;
     let r = cIdx;
-
+    console.log("cIdx =", cIdx);
+    console.log("lr val =", arr[l]);
+    
     for (let i = 1; i < k; i++) {
-        let nxtLDiff = Math.abs(x - arr[l - 1]);
-        let nxtRDiff = Math.abs(x - arr[r + 1]);
-        
+        let diffNextL = Math.abs(x - arr[l - 1]);
+        let diffNextR = Math.abs(x - arr[r + 1]);
+
         if (l === 0) {
             r++;
         } else if (r === arr.length - 1) {
             l--;
-        } else if (nxtLDiff < nxtRDiff || (nxtLDiff === nxtRDiff && arr[l - 1] <= arr[r + 1])) {
+        } else if (diffNextL <= diffNextR) {
             l--;
         } else {
             r++;
         }
+        console.log("i=", i, "lval=", arr[l], "rval=", arr[r]);
     }
-    
+
     return arr.slice(l, r + 1);
+
 };
