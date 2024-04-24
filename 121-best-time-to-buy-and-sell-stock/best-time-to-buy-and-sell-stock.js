@@ -3,7 +3,6 @@
  * @return {number}
  */
 var maxProfit = function(prices) {
-    let buyDate = 0;
     let maxProfit = 0;
     let b = 0;
     let s = b + 1;
@@ -14,7 +13,6 @@ var maxProfit = function(prices) {
         } else {
             let currProfit = prices[s] - prices[b];
             if (currProfit > maxProfit) {
-                buyDate = b;
                 maxProfit = currProfit;
             }
         }
