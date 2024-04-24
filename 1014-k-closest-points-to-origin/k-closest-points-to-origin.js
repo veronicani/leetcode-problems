@@ -15,7 +15,7 @@ var kClosest = function(points, k) {
     }
     //sort the map, from small -> large
     distances.sort((a, b) => (a[0] - b[0]));
-    console.log("sorted distances=", distances);
+    
     //for k times
         //push val of map[i] into the out
     const res = [];
