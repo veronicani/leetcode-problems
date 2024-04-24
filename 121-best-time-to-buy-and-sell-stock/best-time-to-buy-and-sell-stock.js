@@ -19,7 +19,6 @@ var maxProfit = function(prices) {
             }
         }
         s++;
-        console.log("bval=", prices[b], "sval=", prices[s]);
     }
 
     return maxProfit;
