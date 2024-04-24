@@ -12,9 +12,7 @@ var maxProfit = function(prices) {
             b = s;
         } else {
             let currProfit = prices[s] - prices[b];
-            if (currProfit > maxProfit) {
-                maxProfit = currProfit;
-            }
+            maxProfit = Math.max(currProfit, maxProfit);
         }
         s++;
     }
