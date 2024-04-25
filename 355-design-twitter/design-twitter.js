@@ -41,13 +41,12 @@ class Twitter {
         if (this.users[userId] === undefined) return [];
 
         let { feed } = this.users[userId];
-        // console.log('user=', this.users[userId]);
-        const NF = [];
+
+        const feedRecent10 = [];
         for (let i = feed.length - 1; i >= feed.length - 10 && i >= 0; i--) {
-            NF.push(feed[i].tweetId);
+            feedRecent10.push(feed[i].tweetId);
         }
-        // console.log('NF=', NF);
-        return NF;
+        return feedRecent10;
     };
 
     /** 
@@ -69,9 +68,7 @@ class Twitter {
         followers.add(followerId);
 
         //Add most recent 10 tweets from followee into the follower's newsfeed
-        console.log('followee=', this.users[followeeId], 'follower=', this.users[followerId]);
         let mostRecentTwts = tweets.slice(tweets.length - 10, tweets.length);
-        console.log('followeeId=', followeeId, 'mostRecentTwts=', mostRecentTwts); 
         let start = 0;
         if (mostRecentTwts.length >= 10) {
             start = feed.findIndex(f => f.timestamp < mostRecentTwts[0].timestamp);
@@ -94,7 +91,6 @@ class Twitter {
                 feed.push(mostRecentTwts[i]);
             }
         }
-        console.log('feedEnd=', feed); 
     };
 
     /** 
