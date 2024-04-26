@@ -10,9 +10,19 @@
  * @param {TreeNode} root
  * @return {boolean}
  */
-var isValidBST = function(root, min = -Infinity, max = +Infinity) {
-    if (root === null) return true;
-    if (root.val >= max || root.val <= min) return false;
-
-    return (isValidBST(root.left, min, root.val) && isValidBST(root.right, root.val, max));
-};
+var isValidBST = function(root) {
+    let stack = [];
+    let min = -Infinity;
+    let curr = root;
+    while (stack.length || curr) {
+        while (curr) {
+            stack.push(curr);
+            curr = curr.left;
+        }
+        curr = stack.pop();
+        if (curr.val <= min) return false;
+        min = curr.val;
+        curr = curr.right;
+    }
+    return true;
+}
