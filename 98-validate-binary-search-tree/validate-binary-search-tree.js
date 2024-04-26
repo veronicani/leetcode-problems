@@ -10,15 +10,9 @@
  * @param {TreeNode} root
  * @return {boolean}
  */
-var isValidBST = function(root) {
-    var _isValid = function(node, lower, upper) {
-        if (node === null) return true;
-        if (node.val >= upper || node.val <= lower) return false;
+var isValidBST = function(root, min = -Infinity, max = +Infinity) {
+    if (root === null) return true;
+    if (root.val >= max || root.val <= min) return false;
 
-        return (_isValid(node.left, lower, node.val) &&
-            _isValid(node.right, node.val, upper));
-    }
-
-    return _isValid(root, -Infinity, +Infinity);
-
+    return (isValidBST(root.left, min, root.val) && isValidBST(root.right, root.val, max));
 };
