@@ -25,7 +25,3 @@ var reverseList = function(head) {
 
     return prev;
 };
-
-// [null]<[1]<[2]<[3]
-
-//                  p    c
