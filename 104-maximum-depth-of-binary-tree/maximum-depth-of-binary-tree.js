@@ -12,16 +12,13 @@
  */
 var maxDepth = function(root) {
     if (!root) return 0;
-    let queueLL = [root];
-    let height = 0;
-    while (queueLL.length) {
-        let q = queueLL.length;
-        for (let i = 0; i < q; i++) {
-            let curr = queueLL.shift();
-            if (curr.left) queueLL.push(curr.left);
-            if (curr.right) queueLL.push(curr.right);
-        }
-        height++;
+    let max = 1;
+    let stack = [[root, 1]];
+    while (stack.length) {
+        let [curr, height] = stack.pop();
+        max = Math.max(max, height); 
+        if (curr.left) stack.push([curr.left, height + 1]);
+        if (curr.right) stack.push([curr.right, height + 1]);
     }
-    return height;
+    return max; 
 };
