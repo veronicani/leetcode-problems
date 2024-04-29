@@ -11,18 +11,12 @@
  * @return {boolean}
  */
 var isValidBST = function(root) {
-    let stack = [];
-    let min = -Infinity;
-    let curr = root;
-    while (stack.length || curr) {
-        while (curr) {
-            stack.push(curr);
-            curr = curr.left;
-        }
-        curr = stack.pop();
-        if (curr.val <= min) return false;
-        min = curr.val;
-        curr = curr.right;
+    _validBST = function (node, min, max) {
+        if (!node) return true;
+        if ((node.val >= max) || (node.val <= min)) return false;
+        let LNisBST = _validBST(node.left, min, node.val);
+        let RNisBST = _validBST(node.right, node.val, max);
+        return LNisBST && RNisBST;
     }
-    return true;
-}
+    return _validBST(root, -Infinity, +Infinity);
+};
