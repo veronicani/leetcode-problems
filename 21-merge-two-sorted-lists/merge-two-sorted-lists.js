@@ -16,12 +16,12 @@ var mergeTwoLists = function(list1, list2) {
 
     let sorted = new ListNode();
     if (list1.val <= list2.val) {
-        sorted.next = list1;
-        sorted.next.next = mergeTwoLists(list1.next, list2);
+        sorted = list1;
+        sorted.next = mergeTwoLists(list1.next, list2);
     } else {
-        sorted.next = list2;
-        sorted.next.next = mergeTwoLists(list1, list2.next);
+        sorted = list2;
+        sorted.next = mergeTwoLists(list1, list2.next);
     }
 
-    return sorted.next;
+    return sorted;
 };
