@@ -14,14 +14,11 @@ var mergeTwoLists = function(list1, list2) {
     if (!list1) return list2;
     if (!list2) return list1;
 
-    let sorted = new ListNode();
-
     if (list1.val <= list2.val) {
-        sorted.next = list1;
-        sorted.next.next = mergeTwoLists(list1.next, list2);
+        list1.next = mergeTwoLists(list1.next, list2);
+        return list1;
     } else {
-        sorted.next = list2;
-        sorted.next.next = mergeTwoLists(list1, list2.next);
+        list2.next = mergeTwoLists(list1, list2.next);
+        return list2;
     }
-    return sorted.next;
 };
