@@ -22,9 +22,6 @@ var mergeTwoLists = function(list1, list2) {
         list2 = list2.next;
     }
     curr = curr.next;
-    console.log('sorted=', sorted);
-    console.log('curr=', curr);
-    console.log('list1=', list1, 'list2=', list2);
   }
 
   if (list1) curr.next = list1;
