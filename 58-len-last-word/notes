@@ -1,0 +1,21 @@
+str s (words + spaces),
+return len last word in s
+
+
+1.
+input "Hello World"
+out 5 -> "World"
+
+sArr = [Hello, World]
+last = sArr[1] -> World
+5
+
+2. 
+s = "    fly me to the moon   "
+out 4 -> moon
+
+sArr - [fly, me, to, the, moon] / [" ", " ", fly, me, to , the moon, " "]
+
+3. "luffy is still joyboy"
+out 6 -> joyboy
+
