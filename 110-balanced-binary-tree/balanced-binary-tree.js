@@ -11,15 +11,15 @@
  * @return {boolean}
  */
 var isBalanced = function(root) {
-    const isBalanced = [true];
     var balanced = function(root) {
         if (!root) return 0;
         const left = balanced(root.left);
         const right = balanced(root.right);
-        if (Math.abs(left - right) > 1) isBalanced[0] = false;
+        if (left === -1 || right === -1) return -1;
+        if (Math.abs(left - right) > 1) return -1;
         return (Math.max(left, right) + 1);
     }
-    balanced(root);
-    return isBalanced[0];
+    const res = balanced(root);
+    return res >= 0;
 };
 
