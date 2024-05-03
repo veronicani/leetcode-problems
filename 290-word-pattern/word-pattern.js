@@ -6,24 +6,15 @@
 var wordPattern = function(pattern, s) {
     const words = s.split(' ');
     if (pattern.length !== words.length) return false;
-    const ltrToWord = {};
-    const wordToLtr = {};
+    if (new Set(pattern).size !== new Set(words).size) return false;
+
+    const ltrToWord = new Map();
+    
     for (let i = 0; i < pattern.length; i++) {
         let currL = pattern[i];
         let currW = words[i];
-        console.log('currL=', currL, 'currW=', currW);
-        console.log('ltrToWord[currL]', ltrToWord[currL], 'wordToLtr[currW]=', wordToLtr[currW]);
-        console.log('ltrToWord=', ltrToWord, 'wordToLtr=', wordToLtr);
-        if (ltrToWord[currL] !== undefined) {
-            if (ltrToWord[currL] !== currW || wordToLtr[currW] !== currL) {
-                return false;
-            }
-        } else if (typeof wordToLtr[currW] === 'string') {
-            return false;
-        } else {
-            ltrToWord[currL] = currW;
-            wordToLtr[currW] = currL;
-        }
+        if (ltrToWord.has(currL) && ltrToWord.get(currL) !== currW) return false;
+        ltrToWord.set(currL, currW);
     }
     return true;
 };
