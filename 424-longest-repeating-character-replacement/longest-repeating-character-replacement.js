@@ -12,14 +12,11 @@ var characterReplacement = function(s, k) {
     while (r < s.length) {
         count[s[r]] = count[s[r]] === undefined ? 1 : count[s[r]] + 1;
         maxCharCount = Math.max(count[s[r]], maxCharCount);
-        let windowLen = r - l + 1;
-        while (windowLen - maxCharCount > k) {
+        while ((r - l + 1) - maxCharCount > k) {
             count[s[l]]--;
-            maxCharCount = Math.max(...Object.values(count));
             l++;
-            windowLen = r - l + 1;
         }
-        max = Math.max(windowLen, max);
+        max = Math.max(r - l + 1, max);
         r++;
     }
     return max;
