@@ -4,29 +4,23 @@
  * @return {number[]}
  */
 var topKFrequent = function(nums, k) {
-    //loop over nums
-    //add to fC
-    const freq = {};
-    for (let n of nums) {
+    let freq = {};
+    for (n of nums) {
         freq[n] = (freq[n] || 0) + 1;
     }
-
-    //for k times
-    //find the highest count in fC
-    //push val into res
-    //delete val from fC
-    const res = [];
-    for (let i = 0; i < k; i++) {
-        let maxFreqVal = 0;
-        let maxFreq = 0;
-        for (let val in freq) {
-            if (freq[val] > maxFreq) {
-                maxFreq = freq[val];
-                maxFreqVal = val;
-            }
-        }
-        res.push(maxFreqVal);
-        delete freq[maxFreqVal];
+    const freqNums = [];
+    for (let i = 0; i <= nums.length; i++) {
+        freqNums.push(null);
+    }
+    for (let f in freq) {
+        let idx = freq[f];
+        if (freqNums[idx] === null) freqNums[idx] = [];
+        freqNums[idx].push(Number(f));
+    }
+    
+    let res = [];
+    for (let i = freqNums.length - 1; i >= 0 && res.length < k; i--) {
+        if (freqNums[i] !== null) res.push(...freqNums[i]);
     }
     return res;
 };
