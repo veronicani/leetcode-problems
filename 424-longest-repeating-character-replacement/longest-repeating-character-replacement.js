@@ -11,9 +11,7 @@ var characterReplacement = function(s, k) {
     let maxCharCount = 0;
     while (r < s.length) {
         count[s[r]] = count[s[r]] === undefined ? 1 : count[s[r]] + 1;
-        console.log('count=', count);
         maxCharCount = Math.max(count[s[r]], maxCharCount);
-        console.log('maxCharCount=', maxCharCount);
         let windowLen = r - l + 1;
         while (windowLen - maxCharCount > k) {
             count[s[l]]--;
@@ -22,7 +20,6 @@ var characterReplacement = function(s, k) {
             windowLen = r - l + 1;
         }
         max = Math.max(windowLen, max);
-        console.log('max=', max);
         r++;
     }
     return max;
