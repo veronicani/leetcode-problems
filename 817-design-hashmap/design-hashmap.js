@@ -67,16 +67,10 @@ class MyHashMap {
     }
     
     _hashToIdx(key) {
-        //hash the key to an existing index within arrays bounds
-        //return the idx
         return key;
     }
 
     put(key, val) {
-        //_hashToIdx to find idx
-        //lookup this.array[idx]
-        //if null, create a new LL, append k:v to LL
-        //else if LL, append k:v to LL
         const idx = this._hashToIdx(key);
         let ll = this.array[idx];
         if (!ll) {
@@ -87,10 +81,6 @@ class MyHashMap {
     }
 
     remove(key, val) {
-        //_hashToIdx to find idx
-        //lookup this.array[idx]
-        //if null, return -1
-        //else if LL, remove k:v from LL -> if it returns null, return -1
         const idx = this._hashToIdx(key);
         const ll = this.array[idx];
         if (!ll) return -1;
@@ -98,12 +88,6 @@ class MyHashMap {
     }
 
     get(key) {
-        //_hashToIdx to find idx
-        //lookup this.array[idx]
-        //if null, return -1
-        //else if LL, find k:v from LL -> 
-            //if it returns null, return -1
-            //else if it returns node, return node.val
         const idx = this._hashToIdx(key);
         const ll = this.array[idx];
         if (!ll) return -1;
