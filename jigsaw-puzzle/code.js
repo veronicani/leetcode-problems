@@ -9,10 +9,12 @@ class Edge {
 
 class Piece {
   constructor([[lv, lt], [tv, tt], [bv, bt], [rv, rt]]) {
-    this.top = new Edge(tv, tt);
-    this.bottom = new Edge(bv, bt);
-    this.right = new Edge(rv, rt);
-    this.left = new Edge(lv, lt);
+    this.edges = [
+      new Edge(lv, lt),
+      new Edge(tv, tt),
+      new Edge(bv, bt),
+      new Edge(rv, rt),
+    ]
   }
 }
 
@@ -52,23 +54,24 @@ class Jigsaw {
     _findFirst();
 
     while (this.pieces.length) {
+      let prevEdge = this.lastPlaced.right;
       
+      //If the last placed piece's right edge is flat, 
+      //make a new row, and find match for the prev row's first piece
+      if (this.lastPlaced.right.type === 'flat') {
+        let topP = this.board[this.board.length - 1][0];
+        prevEdge = topP.bottom;
+        this.board.push([]);
+      }
+
       for (let i = 0; i < this.pieces.length; i++) {
         let curr = this.pieces[i];
-        if (this._match(curr.left, this.lastPlaced.right) === true) {
-          this._placePiece(curr, i);
-          break;
-        }
-      }
-      if (this.lastPlaced.right.type === 'flat') {
-        let topP = prevRow[0];
-        for (let i = 0; i < this.pieces.length; i++) {
-          let curr = this.pieces[i];
-          if (this._match(curr.top, topP.bottom) === true) {
-            this.board.push([]);
+        for (let j = 0; j < curr.edges.length; j++) {
+          if (this._match(curr.edges[j], prevEdge) === true) {
             this._placePiece(curr, i);
             break;
           }
+          break;
         }
       }
     }
