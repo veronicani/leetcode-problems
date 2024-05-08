@@ -3,22 +3,20 @@
  * @return {number[]}
  */
 var productExceptSelf = function(nums) {
-    const prefix = [];
-    const suffix = [];
-    for (let i = 0; i < nums.length; i++) {
-        let pre = prefix[i - 1] !== undefined ? prefix[i - 1] : 1;
-        prefix[i] = nums[i] * pre;
+    let res = [];
+    let lefts = [];
+    let rights = [];
+    lefts[0] = 1;
+    rights[nums.length -1] = 1;
+
+    for (let i = 1; i < nums.length; i++) {
+        lefts[i] = lefts[i - 1] * nums[i - 1];
     }
-    for (let i = nums.length - 1; i >= 0; i--) {
-        let suf = suffix[i + 1] !== undefined ? suffix[i + 1] : 1;
-        suffix[i] = nums[i] * suf;
+    for (let i = nums.length - 2; i >= 0; i--) {
+        rights[i] = rights[i + 1] * nums[i + 1];
     }
-    const res = [];
-    
     for (let i = 0; i < nums.length; i++) {
-        let pre = prefix[i - 1] !== undefined ? prefix[i - 1] : 1;
-        let suf = suffix[i + 1] !== undefined ? suffix[i + 1] : 1;
-        res[i] = pre * suf;
+        res.push(lefts[i] * rights[i]);
     }
     return res;
 };
