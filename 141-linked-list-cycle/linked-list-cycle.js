@@ -11,10 +11,13 @@
  * @return {boolean}
  */
 var hasCycle = function(head) {
-    while (head) {
-        if (head.seen) return true;
-        head.seen = true;
-        head = head.next;
+    if (!head) return false;
+    let f = head;
+    let s = head;
+    while (f.next && f.next.next) {
+        f = f.next.next;
+        s = s.next;
+        if (f === s) return true;
     }
     return false;
 };
