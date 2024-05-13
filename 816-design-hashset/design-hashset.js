@@ -7,7 +7,7 @@ class LLNode {
 
 class MyHashSet {
     constructor() {
-        this.set = Array.from(10 ** 4);
+        this.set = Array.from({length: 10 ** 4});
     }
 
     hashKey(key) {
