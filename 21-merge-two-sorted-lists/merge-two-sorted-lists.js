@@ -11,17 +11,19 @@
  * @return {ListNode}
  */
 var mergeTwoLists = function(list1, list2) {
-    if (!list1) return list2;
-    if (!list2) return list1;
-
-    let sorted = new ListNode();
-    if (list1.val <= list2.val) {
-        sorted = list1;
-        sorted.next = mergeTwoLists(list1.next, list2);
-    } else {
-        sorted = list2;
-        sorted.next = mergeTwoLists(list1, list2.next);
+    let sorted = new ListNode(0);
+    let cur = sorted;
+    while (list1 && list2) {
+        if (list1.val <= list2.val) {
+            cur.next = list1;
+            list1 = list1.next;
+        } else {
+            cur.next = list2;
+            list2 = list2.next;
+        }
+        cur = cur.next;
     }
-
-    return sorted;
+    if (list1) cur.next = list1;
+    else cur.next = list2;
+    return sorted.next;
 };
