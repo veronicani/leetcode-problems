@@ -5,8 +5,6 @@
 var maxNumberOfBalloons = function(text) {
     let bChars = freqCounter('balloon');
     let tChars = freqCounter(text);
-    console.log('bChars=', bChars);
-    console.log('tChars=', tChars);
 
     let instances = +Infinity;
     for (const b in bChars) {
