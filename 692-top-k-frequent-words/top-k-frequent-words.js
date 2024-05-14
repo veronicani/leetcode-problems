@@ -28,7 +28,6 @@ var freqCounter = function(words) {
 }
 
 var sortAlpha = function(a, b) {
-    console.log('a=', a, 'b=', b);
     let shorterLength = a.length < b.length ? a.length : b.length;
     let longer = shorterLength === a.length ? b : a;
     for (let i = 0; i < shorterLength; i++) {
