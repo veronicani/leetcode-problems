@@ -1,5 +1,5 @@
 class KthLargest {
-    constructor (k, nums) {
+    constructor(k, nums) {
         this.k = k;
         this.minHeap = new MinPriorityQueue();
 
