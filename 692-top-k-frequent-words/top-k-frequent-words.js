@@ -22,7 +22,7 @@ var topKFrequent = function(words, k) {
 var freqCounter = function(words) {
     const count = {};
     for (const w of words) {
-        count[w] = count[w] + 1 || 1;
+        count[w] = (count[w] || 0) + 1;
     }
     return count;
 }
