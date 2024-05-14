@@ -6,17 +6,26 @@
 var topKFrequent = function(words, k) {
     let wordsFreq = freqCounter(words);
 
-    //add each word into a bucket
-    const bucket = [];
-    for (const word in wordsFreq) {
-        if (!bucket[wordsFreq[word]]) bucket[wordsFreq[word]] = [];
-        bucket[wordsFreq[word]].push(word);
+    let pq = new MaxPriorityQueue({
+        compare: (word1, word2) => {
+            if (word1.count > word2.count) return -1;
+            if (word1.count < word2.count) return 1;
+            
+            let sorted = [word1.word, word2.word].sort();
+            return sorted[0] === word1.word ? -1 : 1;
+        }
+    });
+
+    for (let word in wordsFreq) {
+        pq.enqueue({ word, count: wordsFreq[word]});
     }
-    let res = [];
-    for (let i = bucket.length - 1; i >= 0; i--) {
-        if (bucket[i]) res.push(...bucket[i].sort());
+    
+    const res = [];
+    for (let i = 0; i < k; i++) {
+        res.push(pq.dequeue().word);
+        console.log('res=', res);
     }
-    return res.slice(0, k);
+    return res;
 };
 
 var freqCounter = function(words) {
