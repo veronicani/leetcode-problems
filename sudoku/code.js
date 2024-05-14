@@ -43,31 +43,34 @@ class Sudoku {
     }
   }
 
-  // checkForWin() {
-  //   //check all rows 1- 9
-  //   //for loop -> row
-  //     //init nums = Set(1 - 9)
-  //     //for loop -> col
-  //       //currVal = board[y][x];
-  //       //if (!nums.has(currVal)) return false;
-  //       //remove currVal from nums
-  //     //if the nums Set still has vals -> return false;
+  checkForWin() {
+    //check all rows 1- 9
+    //for loop -> row
+      //init nums = Set(1 - 9)
+      //for loop -> col
+        //currVal = board[y][x];
+        //if (!nums.has(currVal)) return false;
+        //remove currVal from nums
+      //if the nums Set still has vals -> return false;
     
-  //     //check all cols 1 - 9
-  //     //for loop -> col
-  //     //init nums = Set(1 - 9)
-  //       //for loop -> row
-  //         //currVal = board[y][x];
-  //         //if (!nums.has(currVal)) return false;
-  //         //remove currVal from nums
-  //     //if the nums Set still has vals -> return false;
+      //check all cols 1 - 9
+      //for loop -> col
+      //init nums = Set(1 - 9)
+        //for loop -> row
+          //currVal = board[y][x];
+          //if (!nums.has(currVal)) return false;
+          //remove currVal from nums
+      //if the nums Set still has vals -> return false;
 
-  //     //check subgrids
-  //     //loop for y -> increment by 3, until length of matrix - 3
-  //       //loop for x - increment by 3, until length of matrix[0] - 3
-  //         //for loop - col init to be equal row# until col reaches 3
+      //check subgrids
+      //make a hashmap of subgrids to sets {1 - 9}
+      //for loop -> row
+        //for loop -> col
+          //calc subgrid # by [Math.floor(row/3) * 3 + Math.floor(col/3)] num of cells in subgrid
+          //if currnum is not in hashmap[subgrid] -> return false
+          //remove currnum from the subgrid set
         
-  // }
+  }
 
   checkForWin() {
     //iterate over this.board from 0, increment by 9 - rows
@@ -84,7 +87,7 @@ class Sudoku {
          //remove currNum from set
       //if set still has vals, return false
 
-    //iterate over board from 0 - 8, increment by 3 - startRow
+    //iterate over board from 0 - 8, increment by 2 - startRow, until reaching length - 2
       //iterate over board from (0, 0) (0, 1), (0, 2) -> (1, 0) (1, 1) (1, 2)
       //
   }
