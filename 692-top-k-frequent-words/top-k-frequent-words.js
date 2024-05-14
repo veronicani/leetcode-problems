@@ -23,7 +23,6 @@ var topKFrequent = function(words, k) {
     const res = [];
     for (let i = 0; i < k; i++) {
         res.push(pq.dequeue().word);
-        console.log('res=', res);
     }
     return res;
 };
