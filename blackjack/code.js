@@ -63,12 +63,15 @@ class BlackJack {
   playMove(action) {
     if (action === 'draw') {
       this.deal();
+
       console.log('playersHand=', this.playersHand);
       this.playerScore = this.scoreHand(this.playersHand);
+      
       if (this.playerScore > 21) {
         this.winner = 'dealer';
         this.endGame();
       }
+    
     } else if (action === 'stop') {
       this.checkWinner();
       this.endGame();
