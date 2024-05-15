@@ -11,16 +11,16 @@
  * @return {boolean}
  */
 var isValidBST = function(root) {
-    let stack = [];
-    let prev = null;
+    let stack = []; //[]
+    let order = []; //[1, 5]
     while (stack.length || root) {
         while (root) {
             stack.push(root);
             root = root.left;
         }
-        root = stack.pop();
-        if (prev && root.val <= prev.val) return false;
-        prev = root;
+        root = stack.pop(); //1
+        if (root.val <= order[order.length - 1]) return false;
+        order.push(root.val); 
         root = root.right;
     }
     return true;
