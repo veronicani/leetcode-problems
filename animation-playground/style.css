@@ -1,14 +1,55 @@
-.container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 500px;
+main {
+  height: 100vh;
+  display: grid;
+  align-items: center;
+}
+
+.spinner-container {
+  position: absolute;
+  top: 50px;
+}
+
+.spinner {
+  width: 70px;
+  aspect-ratio: 1;
+  background:
+    radial-gradient(closest-side,green 90%,#ffffff00) bottom/12px 12px;
+  background-repeat: no-repeat;
+  animation: s7 2s infinite ease;
+  position: absolute;
+}
+
+#spin-2 {
+  background:
+    radial-gradient(closest-side,rgb(0, 49, 128) 90%,#ffffff00) top/12px 12px;
+  background-repeat: no-repeat;
+  animation-delay: .1s;
+}
+
+#spin-3 {
+  background:
+    radial-gradient(closest-side,rgb(230, 34, 181) 90%,#ffffff00) right/12px 12px;
+  background-repeat: no-repeat;
+  animation-delay: .2s;
+}
+
+#spin-4 {
+  background:
+    radial-gradient(closest-side,rgb(201, 161, 43) 90%,#ffffff00) left/12px 12px;
+  background-repeat: no-repeat;
+  animation-delay: .3s;
+}
+
+@keyframes s7 { 
+  100%{transform: rotate(1turn)}
 }
 
 .block {
   width: 100px;
   height: 100px;
-  animation: move 6s infinite;
+  border-radius: 100%;
+  position: absolute;
+  animation: move 4s ease infinite;
 }
 
 #block-1 {
@@ -17,22 +58,25 @@
 
 #block-2 {
   background-color: red;
-  animation-delay: 1s;
+  animation-delay: .5s;
 }
 
 #block-3 {
   background-color: rgb(42, 174, 62);
-  animation-delay: 2s;
+  animation-delay: 1s;
 }
 
 @keyframes move {
   0% {
-    transform: translateY(0px);
+    transform: translate(0%, 0%) scale(50%);
+  }
+  25% {
+    transform: translate(250%, 100%) scale(75%);
   }
   50% {
-    transform: translateY(100px);
+    transform: translate(500%, 50%) scale(100%);
   }
   100% {
-    transform: translateY(0px);
+    transform: translate(0%, 0%) scale(50%);
   }
 }
