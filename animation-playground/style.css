@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 500px;
+}
+
+.block {
+  width: 100px;
+  height: 100px;
+  animation: move 6s infinite;
+}
+
+#block-1 {
+  background-color: aqua;
+}
+
+#block-2 {
+  background-color: red;
+  animation-delay: 1s;
+}
+
+#block-3 {
+  background-color: rgb(42, 174, 62);
+  animation-delay: 2s;
+}
+
+@keyframes move {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(100px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
