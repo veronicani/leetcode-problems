@@ -3,22 +3,15 @@
  * @return {string[][]}
  */
 var groupAnagrams = function(strs) {
-    strs = strs.sort();
-    const sortedStrs = {};
-    for (str of strs) {
-        let sorted = str.split('').sort().join('');
-        if (sortedStrs[sorted] === undefined) {
-            sortedStrs[sorted] = [str];
-        } else {
-            sortedStrs[sorted].push(str);
-        }
+    //hM Map: k = alpha sorted ltrs v: [word]
+    //for str of strs
+        //alpha sort str
+        //create new key of set of str
+    const ltrsToWords = {};
+    for (let s of strs) {
+        const sorted = s.split('').sort();
+        if (sorted in ltrsToWords) ltrsToWords[sorted].push(s);
+        else ltrsToWords[sorted] = [s];
     }
-
-    const anagrams = [];
-
-    for (key in sortedStrs) {
-        anagrams.push(sortedStrs[key]);
-    }
-
-    return anagrams.sort((a, b) => a.length - b.length);
+    return Object.values(ltrsToWords);
 };
