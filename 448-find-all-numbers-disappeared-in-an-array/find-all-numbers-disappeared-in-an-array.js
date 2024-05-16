@@ -3,13 +3,11 @@
  * @return {number[]}
  */
 var findDisappearedNumbers = function(nums) {
-    let set = new Set(Array.from({length: nums.length}, (v, i) => i + 1));
-    
-    for (n of nums) {
-        if (set.has(n)) {
-            set.delete(n);
-        }
+    let set = new Set(nums);
+    let res = [];
+    for (let i = 1; i <= nums.length; i++) {
+        if (!set.has(i)) res.push(i);
     }
     
-    return Array.from(set);
+    return res;
 };
