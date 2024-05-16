@@ -4,17 +4,24 @@
  * @return {boolean}
  */
 var wordPattern = function(pattern, s) {
-    const words = s.split(' ');
-    if (pattern.length !== words.length) return false;
-    if (new Set(pattern).size !== new Set(words).size) return false;
-
-    const ltrToWord = new Map();
+    let words = s.split(' ');
+    if (words.length !== pattern.length) return false;
     
+    let charToWord = new Map();
+    let wordToChar = new Map();
     for (let i = 0; i < pattern.length; i++) {
-        let currL = pattern[i];
-        let currW = words[i];
-        if (ltrToWord.has(currL) && ltrToWord.get(currL) !== currW) return false;
-        ltrToWord.set(currL, currW);
+        let char = pattern[i];
+        let word = words[i];
+        
+        if (!charToWord.has(char) && !wordToChar.has(word)) {
+            charToWord.set(char, word);
+            wordToChar.set(word, char);
+        } else if (charToWord.get(char) !== word ||
+                    wordToChar.get(word) !== char) {
+            return false;
+        } else if (!charToWord.has(char) || !wordToChar.has(word)) {
+            return false;
+        }
     }
     return true;
 };
