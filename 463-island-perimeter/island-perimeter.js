@@ -11,7 +11,7 @@ var islandPerimeter = function(grid) {
             grid[y][x] === 0) {
                 return 1;
             }
-        //
+        //cannot add (y, x) (no tuples) or [y, x] (diff ref) to a set
         if (seen.has(`${y},${x}`)) return 0;
         seen.add(`${y},${x}`);
         let perimeter = 0;
