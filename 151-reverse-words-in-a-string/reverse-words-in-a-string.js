@@ -3,7 +3,7 @@
  * @return {string}
  */
 var reverseWords = function(s) {
-    const res = [];
+    let res = "";
     for (let end = s.length - 1; end >= 0; end--) {
       if (s[end] !== ' ') {
         let start = end;
@@ -11,9 +11,10 @@ var reverseWords = function(s) {
           start--;
         }
         let word = s.slice(start + 1, end + 1);
-        res.push(word);
+        if (res !== '') res += (' ');
+        res += word;
         end = start;
       }
     }
-    return res.join(' ');
+    return res;
 };
