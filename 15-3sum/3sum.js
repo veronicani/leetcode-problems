@@ -1,31 +1,27 @@
 var threeSum = function(nums) {
-    let res = [];
-    nums.sort((a, b) => a - b);
-    const firstValsToComplement = {};
-    
-    for (let start = 0; nums[start] <= 0; start++) {
-      let startVal = nums[start];
-      if (startVal in firstValsToComplement) continue;
-      firstValsToComplement[startVal] = 0 - startVal;
-      
-      const complements = new Set();
-      let left = start + 1;
-      let right = nums.length - 1;
-      
-      while (left < right) {
-        let sum = nums[left] + nums[right];
-        if (sum === firstValsToComplement[startVal]) {
-          if (!complements.has(nums[left]) && !complements.has(nums[right])) {
-            res.push([startVal, nums[left], nums[right]]);
-            complements.add(nums[left]);
-            complements.add(nums[right]);
-          }
-          left++;
-          right--;
-        } else if (sum < firstValsToComplement[startVal]) {
-          left++;
-        } else right--;
+  let res = [];
+  nums.sort((a, b) => a - b);
+  
+  for (let i = 0; i < nums.length; i++) {
+    let startVal = nums[i];
+    if (startVal > 0) break; //the curr # is > than 0, so it cannot add to any other val after
+    if (i > 0 && startVal === nums[i - 1]) continue; //the curr val is a duplicate of prev vals
+    let l = i + 1;
+    let r = nums.length -1;
+    while (l < r) {
+      let b = nums[l];
+      let c = nums[r];
+      let sum = startVal + b + c;
+      if (sum < 0) {
+        l++;
+      } else if (sum > 0) {
+        r--;
+      } else {
+        res.push([startVal, b, c]);
+        l++;
+        while (nums[l] === nums[l - 1]) l++;
       }
     }
-    return res;
+  }
+  return res;
 };
