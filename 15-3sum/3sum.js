@@ -19,6 +19,7 @@ var threeSum = function(nums) {
       } else {
         res.push([startVal, b, c]);
         l++;
+        r--;
         while (nums[l] === nums[l - 1]) l++;
       }
     }
