@@ -1,78 +1,83 @@
-/** DLL Cache Node */
-class DLLNode {
-    constructor(key, val) {
-        this.val = val;
+class QNode {
+    constructor(key, val, timestamp) {
         this.key = key;
+        this.val = val;
         this.next = null;
         this.prev = null;
+        this.timestamp = timestamp;
     }
 }
 
-/** 
- * Your LRUCache object will be instantiated and called as such:
- * var obj = new LRUCache(capacity)
- * var param_1 = obj.get(key)
- * obj.put(key,value)
- */
-
- class LRUCache {
-    constructor(capacity = 0) {
-        this.cache = new Map();
+class LRUCache {
+    constructor(capacity) {
         this.capacity = capacity;
-        
-        this.head = new DLLNode(0, 0);
-        this.tail = new DLLNode(0, 0);
-        this.head.next = this.tail;
-        this.tail.prev = this.head;
+        this.head = null;
+        this.tail = null;
+        this.timestamp = 0;
+        this.length = 0;
+        this.map = {};
     }
 
-    _insertNode(node) {
-        const prev = this.tail.prev;
-        prev.next = node;
-        this.tail.prev = node;
-        node.prev = prev;
-        node.next = this.tail;
+    put(key, val) {
+        let node = this.map[key];
+        if (node) this.remove(key);
+
+        node = new QNode(key, val, this.timestamp);
+        if (this.head === null) {
+            this.head = node;
+            this.tail = node;
+        } else {
+            this.tail.next = node;
+            node.prev = this.tail;
+            this.tail = node;
+        }
+        this.map[key] = node;
+        this.timestamp++;
+        this.length++;
+        while (this.length > this.capacity) {
+            this._dequeue();
+        }
     }
 
-    _removeNode(node) {
-        const prev = node.prev;
-        const next = node.next;
+    remove(key) {
+        let node = this.map[key];
+        if (!node) return;
+        if (this.head === node) {
+            this._dequeue();
+            return;
+        }
+        let prev = node.prev;
+        let next = node.next;
         prev.next = next;
-        next.prev = prev;
-    }
+        if (next) next.prev = prev;
+        else this.tail = prev;
 
-    _findLRUNode() {
-        return this.head.next;
+        delete this.map[node.key];
+        this.length--;
     }
 
     get(key) {
-        if (this.cache.get(key) !== undefined) {
-            //move the node to the end of queue
-            let currNode = this.cache.get(key);
-            this._removeNode(currNode);
-            this._insertNode(currNode);
-            return currNode.val;
-        }
-        return -1;
+        let node = this.map[key];
+        if (!node) return -1;
+        this.remove(key);
+        this.put(key, node.val);
+        return node.val;
     }
 
-    put(key, value) {
-        if (this.cache.get(key) !== undefined) {
-            let currNode = this.cache.get(key);
-            this._removeNode(currNode);
-            this.cache.delete(currNode.key);
+    _dequeue() {
+        let head = this.head;
+
+        if (this.head === this.tail) {
+            head.next = null;
+            this.head = null;
+            this.tail = null;
+        } else {
+            let next = head.next;
+            head.next = null;
+            next.prev = null;
+            this.head = next;
         }
-        
-        //if cache is at capacity
-        if (this.cache.size === this.capacity) {
-            //remove LRU node from queue and cache
-            let lruNode = this._findLRUNode();
-            this._removeNode(lruNode);
-            this.cache.delete(lruNode.key);
-        }
-  
-        let newNode = new DLLNode(key, value);
-        this._insertNode(newNode);
-        this.cache.set(key, newNode);
+        delete this.map[head.key];
+        this.length--;
     }
 }
