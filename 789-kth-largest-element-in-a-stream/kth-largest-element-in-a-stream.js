@@ -7,15 +7,11 @@ class Node {
 }
 
 class MPriorityQueue {
-    constructor(capacity, nums){
-        this.capacity = capacity;
+    constructor(){
         this.length = 0;
         this.head = null;
         this.tail = null;
-        
-        for (const n of nums) {
-            this.enqueue(n);
-        }
+
     }
 
     _findNextNode(node) {
@@ -51,9 +47,6 @@ class MPriorityQueue {
             }
         }
         this.length++;
-        while (this.length > this.capacity) {
-            this.dequeue();
-        }
     }
 
     dequeue() {
@@ -71,7 +64,7 @@ class MPriorityQueue {
     }
 
     findTop() {
-        return this.head.val;
+        return this.head;
     }
 }
 
@@ -81,11 +74,24 @@ class MPriorityQueue {
  */
 class KthLargest {
     constructor(k, nums) {
-        this.pQ = new MPriorityQueue(k, nums);
+        this.pQ = new MPriorityQueue();
+        this.k = k;
+        for (const n of nums) {
+            this.add(n);
+        }
     }
 
     add(val) {
-        this.pQ.enqueue(val);
-        return this.pQ.findTop();
+        if (this.pQ.length < this.k) {
+            this.pQ.enqueue(val);
+            return this.pQ.findTop().val;
+        }
+
+        let top = this.pQ.findTop();
+        if (val > top.val) {
+            this.pQ.dequeue();
+            this.pQ.enqueue(val);
+        }
+        return this.pQ.findTop().val;
     }
 }
