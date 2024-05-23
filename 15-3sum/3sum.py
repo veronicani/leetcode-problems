@@ -2,12 +2,10 @@ class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
         res = []
         nums.sort()
-        print('sorted=', nums)
         for i in range(len(nums) - 1):
             if (i > 0 and nums[i] == nums[i - 1]):
                 continue
             a = nums[i]
-            print('a=', a)
             if a > 0:
                 break
             l = i + 1
