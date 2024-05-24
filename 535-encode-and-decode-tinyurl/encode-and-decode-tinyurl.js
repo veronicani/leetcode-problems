@@ -1,4 +1,7 @@
-const urlStore = {};
+const longToShort = {};
+const shortToLong = {};
+const BASE_URL = 'https://tinyurl.com/';
+
 
 /**
  * Encodes a URL to a shortened URL.
@@ -7,22 +10,10 @@ const urlStore = {};
  * @return {string}
  */
 var encode = function(longUrl) {
-    let slugChars = (
-        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
-        );
-    let initIdx = longUrl.length % slugChars.length;
-    let idx = initIdx;
-    let slug = "";
-    for (let i = 0; i < 7; i++) {
-        slug += slugChars[idx];
-        idx += initIdx;
-        if (idx >= slugChars.length) {
-            idx = 0;
-            initIdx --;
-        }
-    }
-    urlStore[slug] = longUrl;
-    const tinyUrl = `https://tiny.com/${slug}`;
+    const slug = Object.keys(longToShort).length + 1;
+    longToShort[longUrl] = slug;
+    shortToLong[slug] = longUrl;
+    const tinyUrl = `${BASE_URL}${slug}`;
     return tinyUrl;
 };
 
@@ -38,8 +29,7 @@ var decode = function(shortUrl) {
         if (shortUrl[idx] === '/') break;
     }
     const slug = shortUrl.slice(idx + 1);
-    const longUrl = urlStore[slug];
-    if (!longUrl) throw new Error('Invalid shortUrl');
+    const longUrl = shortToLong[slug];
     return longUrl;
 };
 
@@ -47,45 +37,3 @@ var decode = function(shortUrl) {
  * Your functions will be called as such:
  * decode(encode(url));
  */
-
-//  class Solution {
-//     constructor() {
-//         this.urlStore = {};
-//     }
-
-//     _hashUrl(longUrl) {
-//         let slugChars = (
-//         "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
-//         );
-//         let initIdx = longUrl.length % slugChars.length;
-//         let idx = initIdx;
-//         let slug = "";
-//         for (let i = 0; i < 7; i++) {
-//             slug += slugChars[idx];
-//             idx += initIdx;
-//             if (idx >= slugChars.length) {
-//                 idx = 0;
-//                 initIdx --;
-//             }
-//         }
-//         return slug;
-//     }
-
-//     encode(longUrl) {
-//         const slug = this._hashUrl(longUrl);
-//         this.urlStore[slug] = longUrl;
-//         const tinyUrl = `https://tiny.com/${slug}`;
-//         return tinyUrl;
-//     }
-
-//     decode(shortUrl) {
-//         let idx;
-//         for (idx = shortUrl.length - 1; idx >= 0; idx--) {
-//             if (shortUrl[idx] === '/') break;
-//         }
-//         const slug = shortUrl.slice(idx + 1);
-//         const longUrl = this.urlStore[slug];
-//         if (!longUrl) throw new Error('Invalid shortUrl');
-//         return longUrl;
-//     }
-// }
