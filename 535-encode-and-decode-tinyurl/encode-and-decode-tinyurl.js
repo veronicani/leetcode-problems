@@ -1,7 +1,9 @@
 const longToShort = {};
 const shortToLong = {};
 const BASE_URL = 'https://tinyurl.com/';
-
+const slugChars = (
+    'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
+    );
 
 /**
  * Encodes a URL to a shortened URL.
@@ -11,7 +13,11 @@ const BASE_URL = 'https://tinyurl.com/';
  */
 var encode = function(longUrl) {
     if (longToShort[longUrl]) return longToShort[longUrl];
-    const slug = Object.keys(longToShort).length + 1;
+    let slug = "";
+    for (let i = 0; i < 7; i++) {
+        let idx = Math.random() * slugChars.length;
+        slug += slugChars[idx];
+    }
     const tinyUrl = `${BASE_URL}${slug}`;
     longToShort[longUrl] = tinyUrl;
     shortToLong[tinyUrl] = longUrl;
