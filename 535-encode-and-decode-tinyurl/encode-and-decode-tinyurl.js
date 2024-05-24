@@ -10,6 +10,7 @@ const BASE_URL = 'https://tinyurl.com/';
  * @return {string}
  */
 var encode = function(longUrl) {
+    if (longToShort[longUrl]) return longToShort[longUrl];
     const slug = Object.keys(longToShort).length + 1;
     const tinyUrl = `${BASE_URL}${slug}`;
     longToShort[longUrl] = tinyUrl;
