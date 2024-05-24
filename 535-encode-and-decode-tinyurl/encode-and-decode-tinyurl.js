@@ -11,9 +11,9 @@ const BASE_URL = 'https://tinyurl.com/';
  */
 var encode = function(longUrl) {
     const slug = Object.keys(longToShort).length + 1;
-    longToShort[longUrl] = slug;
-    shortToLong[slug] = longUrl;
     const tinyUrl = `${BASE_URL}${slug}`;
+    longToShort[longUrl] = tinyUrl;
+    shortToLong[tinyUrl] = longUrl;
     return tinyUrl;
 };
 
@@ -24,12 +24,7 @@ var encode = function(longUrl) {
  * @return {string}
  */
 var decode = function(shortUrl) {
-    let idx;
-    for (idx = shortUrl.length - 1; idx >= 0; idx--) {
-        if (shortUrl[idx] === '/') break;
-    }
-    const slug = shortUrl.slice(idx + 1);
-    const longUrl = shortToLong[slug];
+    const longUrl = shortToLong[shortUrl];
     return longUrl;
 };
 
