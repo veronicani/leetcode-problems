@@ -13,7 +13,6 @@ var minimumDifference = function(nums, k) {
         let r = l + k - 1;
         let min = nums[l];
         let max = nums[r];
-        console.log('min=', min, 'max=', max);
         minDiff = Math.min(minDiff, max - min);
         l++;
     }
