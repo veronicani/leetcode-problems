@@ -7,7 +7,11 @@ var validPalindrome = function(s) {
     let r = s.length - 1;
     while (l < r) {
         if (s[l] !== s[r]) {
-            return (isPalindrome(s, l + 1, r) || isPalindrome(s, l, r - 1));
+            let lStr = s.slice(l + 1, r + 1);
+            let rStr = s.slice(l, r);
+            if (lStr === reverseStr(lStr)) l++;
+            else if (rStr === reverseStr(rStr)) r--;
+            else return false;
         }
         l++;
         r--;
@@ -15,12 +19,6 @@ var validPalindrome = function(s) {
     return true;
 };
 
-var isPalindrome = function(s, l, r) {
-    if (l > r) {
-        return true;
-    }
-    if (s[l] !== s[r]) return false;
-    l++;
-    r--;
-    return isPalindrome(s, l, r);
+var reverseStr = function(str) {
+    return str.split('').reverse().join('')
 }
