@@ -9,12 +9,13 @@ var minimumDifference = function(nums, k) {
     nums.sort((a, b) => a - b);
     let minDiff = +Infinity;
     let l = 0;
-    while (l <= nums.length - k) {
-        let r = l + k - 1;
+    let r = k - 1;
+    while (r < nums.length) {
         let min = nums[l];
         let max = nums[r];
         minDiff = Math.min(minDiff, max - min);
         l++;
+        r++;
     }
     return minDiff;
 };
