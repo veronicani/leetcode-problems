@@ -3,20 +3,15 @@
  * @return {boolean}
  */
 var isPalindrome = function(s) {
-    let j = s.length - 1;
-    for (let i = 0; i <= j; i++) {
-        if (!isAlphaNum(s, i)) {
-            continue;
-        } else if (!isAlphaNum(s, j)) {
-            j--;
-            i--;
-        } else if (s[i].toLowerCase() !== s[j].toLowerCase()) {
-            return false;
-        } else {
-            j--;
-        }
+    const alphaNum = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';
+    let l = 0;
+    let r = s.length - 1;
+    while (l < r) {
+        while (alphaNum.indexOf(s[l]) < 0 && l < r) l++;
+        while (alphaNum.indexOf(s[r]) < 0 && r > l) r--;
+        if (s[l].toLowerCase() !== s[r].toLowerCase()) return false;
+        l++;
+        r--;
     }
     return true;
 };
-
-const isAlphaNum = (s, i) => s.charCodeAt(i) >= 65 && s.charCodeAt(i) <= 90 || s.charCodeAt(i) >= 48 && s.charCodeAt(i) <= 57 || s.charCodeAt(i) >= 97 && s.charCodeAt(i) <= 122;
