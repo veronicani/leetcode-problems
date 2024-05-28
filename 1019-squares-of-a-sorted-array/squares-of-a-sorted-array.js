@@ -3,12 +3,6 @@
  * @return {number[]}
  */
 var sortedSquares = function(nums) {
-    //find the smallest abs val
-    //start l and r at smallestIdx
-    //while (l >= 0 && r < nums.length)
-        //compare nums[l] and nums[r]
-    //if (nums[l]), push square into out
-    //else push square of nums[r] into out
     let smallestAbs = +Infinity;
     let smallestIdx = 0;
     for (let i = 0; i < nums.length; i++) {
@@ -37,6 +31,6 @@ var sortedSquares = function(nums) {
         res.push(nums[r] ** 2);
         r++;
     }
-    
+
     return res;
 };
