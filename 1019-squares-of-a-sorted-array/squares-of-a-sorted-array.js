@@ -3,34 +3,18 @@
  * @return {number[]}
  */
 var sortedSquares = function(nums) {
-    let smallestAbs = +Infinity;
-    let smallestIdx = 0;
-    for (let i = 0; i < nums.length; i++) {
-        if (Math.abs(nums[i]) < smallestAbs) {
-            smallestAbs = Math.abs(nums[i]);
-            smallestIdx = i;  
-        }
-    }
-    let l = smallestIdx;
-    let r = l + 1;
+    let l = 0;
+    let r = nums.length - 1;
     let res = [];
-    while (l >= 0 && r < nums.length) {
-        if (Math.abs(nums[l]) <= Math.abs(nums[r])) {
+    while (l <= r) {
+        if (Math.abs(nums[l]) > Math.abs(nums[r])) {
             res.push(nums[l] ** 2);
-            l--;
+            l++;
         } else {
             res.push(nums[r] ** 2);
-            r++;
+            r--;
         }
     }
-    while (nums[l] !== undefined) {
-        res.push(nums[l] ** 2);
-        l--;
-    }
-    while (nums[r] !== undefined) {
-        res.push(nums[r] ** 2);
-        r++;
-    }
 
-    return res;
+    return res.reverse();
 };
