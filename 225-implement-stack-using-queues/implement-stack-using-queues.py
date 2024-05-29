@@ -13,9 +13,8 @@ class MyStack:
             self.q2.append(self.q1.popleft())
         popped = self.q1.popleft()
 
-        # move all vals from q2 to q1
-        while len(self.q2):
-            self.q1.append(self.q2.popleft())
+        # swap q1(empty) with q2([1])
+        self.q1, self.q2 = self.q2, self.q1
 
         return popped
 
@@ -24,8 +23,7 @@ class MyStack:
             self.q2.append(self.q1.popleft())
         top = self.q1.popleft()
 
-        while len(self.q2):
-            self.q1.append(self.q2.popleft())
+        self.q1, self.q2 = self.q2, self.q1
         
         self.q1.append(top)
         return top
