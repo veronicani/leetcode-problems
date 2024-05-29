@@ -1,35 +1,25 @@
 class MyStack:
 
     def __init__(self):
-        self.q1 = deque()
-        self.q2 = deque()
+        self.q = deque()
 
     def push(self, x: int) -> None:
-        self.q1.append(x)
+        self.q.append(x)
+        
+        # rotate vals until the last val is at front
+        # e.g. [1, 2, 3] -> [3, 1, 2]
+        for n in range(len(self.q) - 1):
+            self.q.append(self.q.popleft())
 
     def pop(self) -> int:
-        # move all vals from q1 except last into q2
-        while len(self.q1) > 1:
-            self.q2.append(self.q1.popleft())
-        popped = self.q1.popleft()
-
-        # swap q1(empty) with q2([1])
-        self.q1, self.q2 = self.q2, self.q1
-
-        return popped
+        return self.q.popleft()
 
     def top(self) -> int:
-        while len(self.q1) > 1:
-            self.q2.append(self.q1.popleft())
-        top = self.q1.popleft()
-
-        self.q1, self.q2 = self.q2, self.q1
-        
-        self.q1.append(top)
+        top = self.q[0]
         return top
 
     def empty(self) -> bool:
-        return len(self.q1) == 0
+        return len(self.q) == 0
         
 
 
