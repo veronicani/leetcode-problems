@@ -5,17 +5,22 @@ class MyStack:
 
     def push(self, x: int) -> None:
         self.q.append(x)
-        
+
+    def pop(self) -> int:
         # rotate vals until the last val is at front
         # e.g. [1, 2, 3] -> [3, 1, 2]
         for n in range(len(self.q) - 1):
             self.q.append(self.q.popleft())
-
-    def pop(self) -> int:
         return self.q.popleft()
 
     def top(self) -> int:
-        top = self.q[0]
+        # rotate vals until the last val is at front
+        # e.g. [1, 2, 3] -> [3, 1, 2]
+        for n in range(len(self.q) - 1):
+            self.q.append(self.q.popleft())
+        top = self.q.popleft()
+        self.q.append(top)
+        
         return top
 
     def empty(self) -> bool:
