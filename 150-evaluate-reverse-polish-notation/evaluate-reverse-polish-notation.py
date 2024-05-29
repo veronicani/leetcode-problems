@@ -3,20 +3,14 @@ class Solution:
         stk = []
         for t in tokens:
             if t == '+':
-                second = stk.pop()
-                first = stk.pop()
-                stk.append(first + second)
+                stk.append(stk.pop() + stk.pop())
             elif t == '-':
-                second = stk.pop()
-                first = stk.pop()
+                second, first = stk.pop(), stk.pop()
                 stk.append(first - second)
             elif t == '*':
-                second = stk.pop()
-                first = stk.pop()
-                stk.append(first * second)
+                stk.append(stk.pop() * stk.pop())
             elif t == '/':
-                second = stk.pop()
-                first = stk.pop()
+                second, first = stk.pop(), stk.pop()
                 stk.append(int(float(first) / second))
             else:
                 stk.append(int(t))
