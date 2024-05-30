@@ -1,12 +1,17 @@
 class Solution:
     def singleNonDuplicate(self, nums: List[int]) -> int:
-        i = 0
-        while i < len(nums):
-            if i + 1 >= len(nums) or nums[i + 1] != nums[i]:
-                return nums[i]
-            if nums[i + 1] == nums[i]:
-                i += 1
-                while (nums[i] == nums[i - 1] and i < len(nums)):
-                    i += 1
+        l = 0
+        r = len(nums) - 1
+        while (l <= r):
+            m = l + ((r - l) // 2)
+            if ((m - 1 < 0 or nums[m - 1] != nums[m]) and
+                (m + 1 >= len(nums) or nums[m + 1] != nums[m])):
+                return nums[m]
+            
+            leftSize = m - 1 if nums[m - 1] == nums[m] else m
+            if leftSize % 2 == 0:
+                l = m + 1
+            else:
+                r = m - 1
 
         
