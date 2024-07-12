@@ -1,4 +1,3 @@
-import collections
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -7,18 +6,16 @@ import collections
 #         self.right = right
 class Solution:
     def goodNodes(self, root: TreeNode) -> int:
-        res = []
-        to_visit = collections.deque()
-        if root:
-            to_visit.append([root, root.val])
-            
-            while to_visit:
-                curr, greatest = to_visit.popleft()
-                if curr.val >= greatest:
-                    res.append(curr.val)
-                if curr.left:
-                    to_visit.append([curr.left, max(curr.val, greatest)])
-                if curr.right:
-                    to_visit.append([curr.right, max(curr.val, greatest)])
-            
-        return len(res)
+        stk = [(root, root.val)]
+        count = 0
+        while stk:
+            node, greatest = stk.pop()
+            if node.val >= greatest:
+                count += 1
+            greatest = max(greatest, node.val)
+            if node.left:
+                stk.append((node.left, greatest))
+            if node.right:
+                stk.append((node.right, greatest))
+        
+        return count
