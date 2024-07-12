@@ -11,17 +11,16 @@ class Solution:
         to_visit = collections.deque()
         if root:
             to_visit.append(root)
-
+        
         while to_visit:
-            level = []
+            vals = []
             for i in range(len(to_visit)):
-                n = to_visit.popleft()
-                level.append(n.val)
-                if n.left:
-                    to_visit.append(n.left)
-                if n.right:
-                    to_visit.append(n.right)
-            
-            res.append(level)
+                node = to_visit.popleft()
+                vals.append(node.val)
+                if node.left:
+                    to_visit.append(node.left)
+                if node.right:
+                    to_visit.append(node.right)
+            res.append(vals)
         
         return res
