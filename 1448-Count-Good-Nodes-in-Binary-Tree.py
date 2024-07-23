@@ -6,16 +6,15 @@
 #         self.right = right
 class Solution:
     def goodNodes(self, root: TreeNode) -> int:
-        stk = [(root, root.val)]
-        count = 0
-        while stk:
-            node, greatest = stk.pop()
-            if node.val >= greatest:
-                count += 1
-            greatest = max(greatest, node.val)
-            if node.left:
-                stk.append((node.left, greatest))
-            if node.right:
-                stk.append((node.right, greatest))
-        
-        return count
+        to_visit = [(root, root.val)]
+        num_good = 0
+        while to_visit:
+            curr, greatest = to_visit.pop()
+            if curr.val >= greatest:
+                num_good += 1
+                greatest = curr.val
+            if curr.left:
+                to_visit.append((curr.left, greatest))
+            if curr.right:
+                to_visit.append((curr.right, greatest))
+        return num_good
