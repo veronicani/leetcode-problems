@@ -3,7 +3,7 @@ class Solution:
         count = 0
         def markIsland(coords):
             y, x = coords
-            if (y < 0 or y >= len(grid)) or (x < 0 or x >= len(grid[0])):
+            if y not in range(len(grid)) or x not in range(len(grid[0])):
                 return
             if grid[y][x] == '0' or grid[y][x] == 'x':
                 return
