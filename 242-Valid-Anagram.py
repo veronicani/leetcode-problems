@@ -1,12 +1,13 @@
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        chars = {}
+        s_chars = defaultdict(int)
         for c in s:
-            chars[c] = chars.get(c, 0) + 1
+            s_chars[c] += 1
         for c in t:
-            if c not in chars:
+            if c not in s_chars:
                 return False
-            chars[c] -= 1
-            if chars[c] == 0:
-                del chars[c]
-        return len(chars) == 0
+            s_chars[c] -= 1
+            if not s_chars[c]:
+                del s_chars[c]
+
+        return len(s_chars) == 0
