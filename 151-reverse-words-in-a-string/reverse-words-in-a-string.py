@@ -1,16 +1,21 @@
 class Solution:
     def reverseWords(self, s: str) -> str:
-        reversed = []
+        words = []
         word = []
         for char in s:
+            # if char is ' ' - if word, add word to words
             if char == ' ':
                 if word:
-                    reversed.insert(0,"".join(word))
-                word = []
+                    words.append("".join(word))
+                    word = []
+            # else add char to word
             else:
                 word.append(char)
         
+        # if word, add word to words
         if word:
-            reversed.insert(0,"".join(word))
+            words.append("".join(word))
+
+        print('words-', words)
         
-        return " ".join(reversed)
+        return " ".join(words[::-1])
