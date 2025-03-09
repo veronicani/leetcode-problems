@@ -3,9 +3,6 @@ class Solution:
         nums1_vals = set(nums1)
         nums2_vals = set(nums2)
 
-        print('nums1=', nums1_vals)
-        print('nums2=', nums2_vals)
-
         nums1_unique = []
         nums2_unique = []
 
