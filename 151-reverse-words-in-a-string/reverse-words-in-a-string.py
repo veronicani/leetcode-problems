@@ -3,10 +3,10 @@ class Solution:
         words = []
         l, r = len(s) - 1, len(s) - 1
         while l >= 0:
-            while s[l] == ' ':
+            while l >= 0 and s[l] == ' ':
                 l -= 1
                 r -= 1
-            while s[l].isalnum() and l >= 0:
+            while l >= 0 and s[l].isalnum():
                 l -= 1
             if s[l + 1: r + 1]:
                 words.append(s[l + 1: r + 1])
