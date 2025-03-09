@@ -11,7 +11,5 @@ class Solution:
             if s[l + 1: r + 1]:
                 words.append(s[l + 1: r + 1])
             r = l
-        
-        print('words=', words)
             
         return " ".join(words)
