@@ -3,18 +3,10 @@ class Solution:
         nums1_vals = set(nums1)
         nums2_vals = set(nums2)
 
-        nums1_unique = []
-        nums2_unique = []
-
         for n1 in nums1:
-            if n1 not in nums2_vals and n1 in nums1_vals:
-                nums1_unique.append(n1)
+            if n1 in nums2_vals:
                 nums1_vals.remove(n1)
+                nums2_vals.remove(n1)
         
-        for n2 in nums2:
-            if n2 not in nums1_vals and n2 in nums2_vals:
-                nums2_unique.append(n2)
-                nums2_vals.remove(n2)
-        
-        return [nums1_unique, nums2_unique]
+        return [list(nums1_vals), list(nums2_vals)]
         
