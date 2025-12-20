@@ -28,9 +28,7 @@ class Solution:
             
     def get_k_most_freq_els(self, k: int, sorted_vals: List[List[int]]) -> List[int]:
         out = []
-        print('sorted_vals=', sorted_vals)
         for bucket in sorted_vals[::-1]:
-            print(f'{bucket=}')
             for val in bucket:
                 out.append(val)
                 if len(out) >= k:
