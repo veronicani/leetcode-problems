@@ -4,14 +4,14 @@ class Solution:
         nrows = len(text1) + 1
         dp = [[0 for _ in range(ncols)] for _ in range(nrows)]
 
-        for c1 in range(len(text1) - 1 , -1, -1):
-            for c2 in range(len(text2) - 1, -1, -1):
+        for c1 in range(1, nrows):
+            for c2 in range(1, ncols):
                 # if letters match
-                if text1[c1] == text2[c2]:
+                if text1[c1 - 1] == text2[c2 - 1]:
                     # curr cell = len of current match + len(following subsequence after current letters)
-                    dp[c1][c2] = 1 + dp[c1+1][c2+1]
+                    dp[c1][c2] = 1 + dp[c1-1][c2-1]
                 else:
                     # longest subsequence is either in text2 & following text1 - c1 or text1 & following text2 - c2
-                    max_next_sub = max(dp[c1+1][c2], dp[c1][c2+1])
+                    max_next_sub = max(dp[c1-1][c2], dp[c1][c2-1])
                     dp[c1][c2] = max_next_sub
-        return dp[0][0]
+        return dp[-1][-1]
