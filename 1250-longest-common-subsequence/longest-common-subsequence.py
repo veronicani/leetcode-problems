@@ -6,10 +6,12 @@ class Solution:
 
         for c1 in range(len(text1) - 1 , -1, -1):
             for c2 in range(len(text2) - 1, -1, -1):
+                # if letters match
                 if text1[c1] == text2[c2]:
-                    
+                    # curr cell = len of current match + len(following subsequence after current letters)
                     dp[c1][c2] = 1 + dp[c1+1][c2+1]
                 else:
+                    # longest subsequence is either in text2 & following text1 - c1 or text1 & following text2 - c2
                     max_next_sub = max(dp[c1+1][c2], dp[c1][c2+1])
                     dp[c1][c2] = max_next_sub
         return dp[0][0]
